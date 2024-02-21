@@ -68,14 +68,14 @@ public class MyController {
 	    	trans=transport;
 	    	System.out.println("After input transport : "+trans);
 	    	if (bud.equals("low") == true) {
-	    		budValue = 20000;
+	    		budValue = 10000;
 	    		
 	    	}else if(bud.equals("medium") == true) {
-	    		budValue = 60000;
+	    		budValue = 40000;
 	    		
 	    	}else {
 	    		
-	    		budValue = 100000;
+	    		budValue = 80000;
 	    	}
 	    	
 	    	System.out.println("After if else if budValue :"+budValue);
