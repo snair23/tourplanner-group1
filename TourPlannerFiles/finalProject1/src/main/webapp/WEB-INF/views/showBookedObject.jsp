@@ -43,7 +43,7 @@
             <thead>
                 <tr>
                     <th>Group ID</th>
-                    <th>Package ID</th>
+                    <th>Package Name</th>
                     <th>Start Date</th>
                     <th>Total Cost</th>
                 </tr>
@@ -51,12 +51,39 @@
             <tbody>
                         <tr>
                             <td>${gid}</td>
-                            <td>${pid}</td>
+                            <td>${pname}</td>
                             <td>${dte}</td>
                             <td>${cst}</td>
                         </tr>
             </tbody>
         </table>
+        
+        <table border="1">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>gender</th>
+            <th>age</th>
+            <!-- Add more columns as needed -->
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                            <td>${mem0name}</td>
+                            <td>${mem0gender}</td>
+                            <td>${mem0age}</td>
+                            
+                        </tr>
+                        
+                         <tr>
+                            <td>${mem1name}</td>
+                            <td>${mem1gender}</td>
+                            <td>${mem1age}</td>
+                            
+                        </tr>
+        </tbody>
+        
+    </table>
     </div>
 </body>
 </html>

@@ -23,6 +23,7 @@ import com.expleo.finalProject1.entity.Packages;
 import com.expleo.finalProject1.service.BookingService;
 import com.expleo.finalProject1.service.CustomService;
 import com.expleo.finalProject1.service.MemberService;
+import com.expleo.finalProject1.service.Packageservice;
 
 @Controller
 public class MyController {
@@ -37,6 +38,10 @@ public class MyController {
 	
 	@Autowired
 	BookingService Bservice;
+	
+	@Autowired
+	Packageservice Pservice;
+	
 	private int budValue,cityCount,travelCost,totalDays,memberCount,totalCost;
 	private String name,Pid,bud,trans;
 	private String id, startDate1, pID1;
@@ -85,6 +90,7 @@ public class MyController {
 	    	
 	    	totalDays = totalDays+(Integer.parseInt(days));
 	    	cityCount++;
+	    	System.out.println("After city count++"+cityCount);
 	    	Cservice.save(p);
 	    	return "addPackage2";
 	    }
@@ -118,6 +124,7 @@ public class MyController {
     		
     		travelCost = 1050 * cityCount;
     	}
+		System.out.println("After if else if travel cost : "+travelCost);
 		
 		
 		try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/expleo", "root", "root123")){  //because connection is established in () after try con.close() is automatically done and no need to be written
@@ -141,6 +148,7 @@ public class MyController {
 	@PostMapping(path = "/saveMember")
 	public String saveMember(@ModelAttribute(name = "members") Members m) {
 		memberCount++;
+		System.out.println("Member count after increment : "+memberCount);
 		m.setGroupId(id);
 		Mservice.save(m);
 		return "addMember";
@@ -149,11 +157,13 @@ public class MyController {
 	@PostMapping(path = "/createBooking")
 	public String saveBooking(Model model) {
 		//Bookings(String groupId, String packageId, String startDate)
-		
 		travelCost = travelCost * memberCount;
 		budValue = budValue * memberCount;
 		
 		totalCost = travelCost + budValue;
+		System.out.println("Travel cost : "+travelCost);
+		System.out.println("Bud value : "+budValue);
+		System.out.println("Total cost : "+totalCost);
 		
 		Bookings b = new Bookings(id, pID1, startDate1, totalCost);
 		Bservice.save(b);
@@ -174,16 +184,32 @@ public class MyController {
 //		ArrayList<Members> m1 = new ArrayList<>();
 //		
 		Bookings b = Bservice.findBygroupId(groupId);
+		ArrayList<Members> m= Mservice.findBygroupId(groupId);
+	    String str="mem";
 //		m1 = Mservice.findBygroupId(groupId);
 //		
 //		model.addAttribute("m1", m1);
 ////		b1.add(b);
 //		System.out.println("group id  : "+b.getGroupId());
+	    String p=Pservice.findBypackageId(b.getPackageId());
 		
 		model.addAttribute("gid", b.getGroupId());
-		model.addAttribute("pid", b.getPackageId());
+//		model.addAttribute("pid", b.getPackageId());
+		model.addAttribute("pname", p);
 		model.addAttribute("dte", b.getStartDate());
+		System.out.println("Displaying : "+b.getCost());
 		model.addAttribute("cst", b.getCost());
+		
+		for(int i=0;i<m.size();i++)
+		 {
+			
+			
+			 model.addAttribute(str+i+"name",m.get(i).getName());
+			 model.addAttribute(str+i+"gender",m.get(i).getGender());
+			 model.addAttribute(str+i+"age",m.get(i).getAge());
+			
+		 }
+		
 		return "showBookedObject";
 		
 	}
