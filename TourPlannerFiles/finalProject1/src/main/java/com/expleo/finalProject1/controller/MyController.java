@@ -49,7 +49,7 @@ public class MyController {
 	@Autowired
     private UserRepository userRepository;
 	
-	private int budValue,cityCount,travelCost,totalDays,memberCount,totalCost;
+	private int budValue = 10000,cityCount,travelCost=450,totalDays,memberCount,totalCost;
 	private String name,Pid,bud,trans;
 	private String id, startDate1, pID1;
 	
@@ -118,6 +118,18 @@ public class MyController {
 	public String book1(@RequestParam String startDate,String pID) {
 		pID1 = pID;
 		startDate1 = startDate;
+													//------------
+		
+		try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/expleo", "root", "root123")){  //because connection is established in () after try con.close() is automatically done and no need to be written
+			Statement st = con.createStatement();
+			ResultSet rs1 = st.executeQuery("SELECT transport FROM packages ORDER BY serial_num DESC LIMIT 1;");
+			rs1.next();
+			trans= rs1.getString(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(trans.equals("Bus") == true) {
     		travelCost = 250 * cityCount;

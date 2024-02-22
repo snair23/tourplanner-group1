@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
@@ -33,6 +31,22 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -40,6 +54,7 @@
     <div class="container">
         <h1>BOOKING DONE! ENJOY YOUR VACATION</h1>
         <h2>Your Id is : ${bID} use this to check your booking</h2>
+        <a href="checkBookingForm" class="btn">Check Booking</a>
     </div>
 </body>
 
