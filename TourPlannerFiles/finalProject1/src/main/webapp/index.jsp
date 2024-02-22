@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <h1>Tourism Management</h1>
-        <a href="addPackage" class="button">Create Package</a>
+         <a href="login" class="button">Create Package</a> <!--addPackage -->
         <a href="booking" class="button">Make Booking</a>
         <a href="checkBookingForm" class="button">Check Booking</a>
     </div>

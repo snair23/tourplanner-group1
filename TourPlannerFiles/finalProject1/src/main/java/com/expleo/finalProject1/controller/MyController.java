@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.expleo.finalProject1.entity.Bookings;
 import com.expleo.finalProject1.entity.Members;
 import com.expleo.finalProject1.entity.Packages;
+import com.expleo.finalProject1.entity.User;
+import com.expleo.finalProject1.repo.UserRepository;
 import com.expleo.finalProject1.service.BookingService;
 import com.expleo.finalProject1.service.CustomService;
 import com.expleo.finalProject1.service.MemberService;
@@ -43,6 +45,9 @@ public class MyController {
 	
 	@Autowired
 	Packageservice Pservice;
+	
+	@Autowired
+    private UserRepository userRepository;
 	
 	private int budValue,cityCount,travelCost,totalDays,memberCount,totalCost;
 	private String name,Pid,bud,trans;
@@ -227,6 +232,19 @@ public class MyController {
 		return "registration";
 		
 	}
+	
+	@PostMapping("/checkUser")
+    public String checkUser(@RequestParam String fullName, String password) {
+        User user = userRepository.findByFullNameAndPassword(fullName, password);
+        System.out.println("User value : "+user); //addPackage
+        if(user == null) {
+        	return "login";
+        } else {
+        	
+        	return "addPackage1";
+        }
+        
+        }
 	
 
 }

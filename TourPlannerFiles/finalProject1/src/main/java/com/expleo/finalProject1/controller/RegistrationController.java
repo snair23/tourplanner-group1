@@ -17,15 +17,10 @@ public class RegistrationController {
     @Autowired
     UserService service;
     
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
     
-    @PostMapping("/checkUser")
-    public boolean checkUser(@RequestParam String fullName, String password) {
-        User user = userRepository.findByFullNameAndPassword(fullName, password);
-        System.out.println("User value : "+user);
-        return user != null;
-        }
+    
  
     @PostMapping("/register")
     public String registerUser(@ModelAttribute(name = "user") User user) {
